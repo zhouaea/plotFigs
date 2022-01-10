@@ -5,13 +5,6 @@
   "plot_cdf_png_height": 600,
   "plot_cdf_png_width": 800,
   "plot_cdf_series_title": ["Gryff", "EPaxos", "Multi-Paxos"],
-
-  "client_conflict_percentage": [25, 2, 10, 25],
-  "client_write_percentage": [495, 45, 45, 45],
-  "client_read_percentage": [495, 945, 945, 945],
-  "client_rmw_percentage": [10, 10, 10, 10],
-  "client_nodes_per_server": 2,
-  "client_processes_per_client_node": 8,
   "cdf_plots": {
     "font": "DejaVu Sans,12",
     "height": 600,
@@ -24,7 +17,7 @@
   "plot_tput_lat_png_font": "DejaVu Sans,12",
   "plot_tput_lat_png_height": 600,
   "plot_tput_lat_png_width": 800,
-  "plot_tput_lat_series_title": ["Gryff", "EPaxos-thrifty", "Multi-Paxos"],
+  "plot_tput_lat_series_title": ["Gryff", "Gus", "EPaxos"],
   "plot_tput_lat_x_label": "Throughput (ops/sec)",
   "plot_tput_lat_y_label": "Latency (ms)",
 }
