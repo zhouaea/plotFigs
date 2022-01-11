@@ -5,16 +5,22 @@ import os
 
 # just takes a list of latencies, does not care about the context of the latencies
 def latencies_to_csv(csv_target_directory, latencies, protocol, figure):
-    print("converting latencies to cdfs")
+    # print("converting latencies to cdfs")
     cdf_data, cdf_log_data = latencies_to_cdfs(latencies)
-    print("first five rows for cdf data and first five rows for cdf log data")
-    print(cdf_data[:5], cdf_log_data[:5])
+
+    # if protocol == "epaxos":
+    #     print(protocol, figure, "cdf_data")
+    #     print(cdf_data)
+    #     exit()
+
+    # print("first five rows for cdf data and first five rows for cdf log data")
+    # print(cdf_data[:5], cdf_log_data[:5])
 
     cdf_csv_file = os.path.join(csv_target_directory, protocol, '%s-%s.csv' % (protocol, figure))
     cdf_log_csv_file = os.path.join(csv_target_directory, protocol, '%s-%s-log.csv' % (protocol, figure))
-    print("cdf file is called %s and log cdf file is called %s" % (cdf_csv_file, cdf_log_csv_file))
-
-    print("converting cdfs to csvs")
+    # print("cdf file is called %s and log cdf file is called %s" % (cdf_csv_file, cdf_log_csv_file))
+    #
+    # print("converting cdfs to csvs")
     generate_csv_for_cdf_plot(cdf_csv_file, cdf_data)
     generate_csv_for_cdf_plot(cdf_log_csv_file, cdf_log_data, log=True)
     return cdf_csv_file, cdf_log_csv_file
@@ -31,7 +37,7 @@ def latencies_to_cdfs(latencies, cdf_log_precision=4):
 def calculate_cdf_for_npdata(npdata):
     ptiles = []
     for i in range(1, 100):  # compute percentiles [1, 100)
-        ptiles.append([i, numpy.percentile(npdata, i, interpolation='higher')])
+        ptiles.append([i, numpy.percentile(npdata, i)])
     return ptiles
 
 
@@ -44,7 +50,7 @@ def calculate_cdf_log_for_npdata(npdata, precision):
         for j in range(0, 90):
             if i == 0 and j == 0:
                 continue
-            ptiles.append([base + j / scale, numpy.percentile(npdata, base + j / scale, interpolation='higher')])
+            ptiles.append([base + j / scale, numpy.percentile(npdata, base + j / scale)])
         base += 90 / scale
         scale = scale * 10
     return ptiles
