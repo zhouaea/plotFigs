@@ -15,9 +15,17 @@ def csvs_to_plot(plot_target_directory, figure, gryff_csv, gus_csv, epaxos_csv, 
 def generate_gnuplot_script(plot_script_file, plot_target_directory, csvs, protocols, figure, is_for_reads, log=False):
     with open(plot_script_file, 'w+') as f:
         f.write("set datafile separator ','\n")
-        f.write("set terminal pngcairo size 1500,1000 enhanced font 'Helvetica,36'\n")
+        f.write("set terminal pngcairo size 1500,500 enhanced font 'Helvetica,36'\n")
 
-        f.write("set key bottom right\n")
+        if '9' in figure:
+            if log:
+                f.write("set key at graph 0.85, 0.725\n")
+            else:
+                f.write("set key at graph 0.9, 0.725\n")
+
+        else:
+            f.write("set key bottom right\n")
+
 
         f.write("set xlabel 'Latency (ms)'\n")
         if is_for_reads:
@@ -28,7 +36,7 @@ def generate_gnuplot_script(plot_script_file, plot_target_directory, csvs, proto
         f.write("set ytics .2\n")
 
         if '6' in figure:
-            f.write("set xrange [0:350]\n")
+            f.write("set xrange [0:300]\n")
 
         f.write('set output \'%s/%s\'\n' % (plot_target_directory, os.path.splitext(os.path.basename(plot_script_file))[0] + '.png'))
 
