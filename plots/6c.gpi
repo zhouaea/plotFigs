@@ -1,0 +1,14 @@
+set datafile separator ','
+set terminal pngcairo size 1500,1000 enhanced font 'Helvetica,36'
+set key bottom right
+set xlabel 'Latency (ms)'
+set ylabel 'Fraction of Reads'
+set ytics .2
+set xrange [0:350]
+set output '/Users/zhouaea/Desktop/plotFigs/plots/6c.png'
+set style line 1 linetype 1 linecolor "web-green" linewidth 6 dashtype 4
+set style line 2 linetype 1 linecolor "orange" linewidth 6 dashtype 1
+set style line 3 linetype 1 linecolor "blue" linewidth 6 dashtype 3
+plot '/Users/zhouaea/Desktop/plotFigs/csvs/gryff/gryff-6c.csv' title 'Gryff' ls 1 with lines, \
+'/Users/zhouaea/Desktop/plotFigs/csvs/gus/gus-6c.csv' title 'Gus' ls 2 with lines, \
+'/Users/zhouaea/Desktop/plotFigs/csvs/epaxos/epaxos-6c.csv' title 'EPaxos' ls 3 with lines
